@@ -13,15 +13,20 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        // Start PHP session if not started
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        // Check if user is logged in and is admin
-        if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== '0') {
-            return redirect()->route('logout');
+
+        if (!isset($_SESSION['user_id'])) {
+            return redirect()->route('login');
+        }
+
+        $role = (int) ($_SESSION['role'] ?? -1);
+
+        if ($role !== 0) {
+            abort(403);
         }
         return $next($request);
     }

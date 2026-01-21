@@ -1,5 +1,4 @@
 @extends('admin.template')
-@yield('title', 'Admin Dashboard')
 @section('content')
 <div class="container mt-5">
     <h3 class="mb-4">Edit Manager</h3>
@@ -27,6 +26,10 @@
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control" value="{{ old('email', $manager->email) }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Mobile</label>
+            <input type="text" name="mobile" class="form-control" value="{{ old('mobile', $manager->mobile) }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Update Manager</button>

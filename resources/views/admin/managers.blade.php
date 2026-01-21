@@ -1,5 +1,4 @@
 @extends('admin.template')
-@yield('title', 'Admin Dashboard')
 @section('content')
 <div class="container mt-5">
     <h3 class="mb-4">Managers List</h3>
@@ -16,6 +15,7 @@
                 <th>ID</th>
                 <th>Full Name</th>
                 <th>Email</th>
+                <th>Mobile</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,6 +25,7 @@
                 <td>{{ $manager->id }}</td>
                 <td>{{ $manager->first_name }} {{ $manager->last_name }}</td>
                 <td>{{ $manager->email }}</td>
+                <td>{{ $manager->mobile ? $manager->mobile : '-' }}</td>
                 <td>
                     <a href="{{ route('managers.edit.form', $manager->id) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('managers.delete', $manager->id) }}" method="POST" style="display:inline-block;">

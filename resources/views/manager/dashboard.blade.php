@@ -1,2 +1,2 @@
-@extends('admin.template')
-@yield('title', 'Admin Dashboard')
+@extends('manager.template')
+@yield('title', 'Manager Dashboard')

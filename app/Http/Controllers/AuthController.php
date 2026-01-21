@@ -73,13 +73,13 @@ class AuthController extends Controller
         }
 
         switch ((int) $_SESSION['role']) {
-            case 0:
+            case '0':
                 return view('admin.dashboard', ['user' => $user]);
 
-            case 1:
+            case '1':
                 return view('manager.dashboard', ['user' => $user]);
 
-            case 2:
+            case '2':
                 return view('user.dashboard', ['user' => $user]);
 
             default:

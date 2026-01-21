@@ -42,7 +42,9 @@ class AdminController extends Controller
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'email'      => $request->email,
+            'mobile'     => $request->has('mobile') ? $request->mobile : null,
             'role'       => '1', // Manager
+
             'password'   => Hash::make($request->password),
         ]);
 
@@ -55,9 +57,9 @@ class AdminController extends Controller
      */
     public function editManagerForm($id)
     {
-        $manager = User::where('role', 1)->findOrFail($id);
+        $manager = User::where('role', '1')->findOrFail($id);
 
-        return view('admin.managers.edit', compact('manager'));
+        return view('admin.editmanager', compact('manager'));
     }
 
     /**
@@ -65,7 +67,7 @@ class AdminController extends Controller
      */
     public function editManager(Request $request, $id)
     {
-        $manager = User::where('role', 1)->findOrFail($id);
+        $manager = User::where('role', '1')->findOrFail($id);
 
         $request->validate([
             'first_name' => 'required|string|max:100',
@@ -77,6 +79,7 @@ class AdminController extends Controller
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'email'      => $request->email,
+            'mobile'     => $request->has('mobile') ? $request->mobile : null,
         ]);
 
         return redirect()->route('managers.list')
@@ -88,7 +91,7 @@ class AdminController extends Controller
      */
     public function deleteManager($id)
     {
-        $manager = User::where('role', 1)->findOrFail($id);
+        $manager = User::where('role', '1')->findOrFail($id);
         $manager->delete();
 
         return redirect()->route('managers.list')
