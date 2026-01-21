@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ManagerMiddleware;
+use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -30,4 +32,26 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::post('/managers/{id}/delete', [AdminController::class, 'deleteManager'])
         ->name('managers.delete');
+});
+
+
+Route::middleware([ManagerMiddleware::class])->group(function () {
+
+    Route::get('/managers', [ManagerController::class, 'showUsers'])
+        ->name('users.list');
+
+    Route::get('/managers/create', [ManagerController::class, 'createUsersForm'])
+        ->name('users.create.form');
+
+    Route::post('/managers/create', [ManagerController::class, 'createUsers'])
+        ->name('users.create');
+
+    // Route::get('/managers/{id}/edit', [ManagerController::class, 'editManagerForm'])
+    //     ->name('managers.edit.form');
+
+    // Route::post('/managers/{id}/edit', [ManagerController::class, 'editManager'])
+    //     ->name('managers.edit');
+
+    // Route::post('/managers/{id}/delete', [ManagerController::class, 'deleteManager'])
+    //     ->name('managers.delete');
 });
