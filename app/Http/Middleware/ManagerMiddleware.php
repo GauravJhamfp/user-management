@@ -20,7 +20,7 @@ class ManagerMiddleware
             session_start();
         }
         // Check if user is logged in and is manager
-        if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'manager') {
+        if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== '1') {
             return redirect()->route('logout');
         }
         return $next($request);

@@ -13,9 +13,9 @@ class AdminController extends Controller
      */
     public function showManagers()
     {
-        $managers = User::where('role', 1)->get();
+        $managers = User::where('role', '1')->get();
 
-        return view('admin.managers.index', compact('managers'));
+        return view('admin.managers', compact('managers'));
     }
 
     /**
@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function createManagerForm()
     {
-        return view('admin.managers.create');
+        return view('admin.createmanager');
     }
 
     /**
@@ -42,7 +42,7 @@ class AdminController extends Controller
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'email'      => $request->email,
-            'role'       => 1, // Manager
+            'role'       => '1', // Manager
             'password'   => Hash::make($request->password),
         ]);
 

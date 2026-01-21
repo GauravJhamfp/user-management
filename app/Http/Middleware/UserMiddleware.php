@@ -20,7 +20,7 @@ class UserMiddleware
             session_start();
         }
         // Check if user is logged in and is user
-        if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'user') {
+        if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== '2') {
             return redirect()->route('logout');
         }
         return $next($request);
